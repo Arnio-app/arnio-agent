@@ -447,6 +447,50 @@ ESCALATION RULES
 - If something is broken or urgent, DM Greg immediately on Slack
 - When in doubt, ask Greg first and act second
 
+ENVIRONMENTS
+
+- Staging: staging.arnio.co — use this to test things before they go live
+- Production: app.arnio.co — live environment, real user data, be careful here
+- Never make changes directly in production without testing in staging first
+- If you are unsure which environment to use, ask Greg
+
+ARNIO DASHBOARD — FEATURES BUILT TODAY
+
+Home Tab
+- KPI cards: Visitors Detected, Engaged Visitors, Identified Shoppers, Revenue Recovered
+- Visitors detected over time chart
+- Time-based personalized greeting (Good morning / afternoon / evening / late night)
+- First visit vs returning user detection
+
+Performance Tab
+- Channel breakdown table: Meta, Instagram, TikTok, Organic, Direct
+- Intent signals table: ad clicks, product views, cart adds, and more
+- Date range filter: 7d, 30d, 90d
+- Channel filter
+- Empty states when no data is available yet
+
+Activity Tab
+- Full log of every shopper interaction
+- Filters: All, Handled, Needs Setup, Missed
+- Status badges per event
+
+Settings Tab
+- Sign-in Preferences and Integrations
+- Safe Routing controls: toggle on/off, daily limit, score threshold, pause
+- Plan and Billing
+
+Auth and Onboarding
+- Clerk authentication with Google SSO
+- Shopify OAuth connection
+- Klaviyo API key connection
+- Store setup flow
+
+Backend
+- Intent scoring: Low (0-29), Engaged (30-59), High Intent (60-79), Ready to Buy (80+)
+- Routing queue with daily limits
+- Shopper profiles per store
+- All data scoped by store_id
+
 ABOUT GREG
 
 - Greg Jones, Founder and CEO of Arnio
