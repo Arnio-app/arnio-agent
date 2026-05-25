@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Arnio Team Agent</title>
+<link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -11,25 +12,21 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f6f6f6;
+    --bg: #ffffff;
     --surface: #ffffff;
+    --surface2: #f6f6f6;
     --border: #e0e0e0;
     --border2: #eeeeee;
     --text: #1a1f1a;
     --muted: #808580;
-    --muted2: #b0b5b0;
-    --primary: #1a1f1a;
-    --primary-fg: #ffffff;
+    --muted2: #b0b0b0;
     --user-bg: #1a1f1a;
     --user-fg: #ffffff;
-    --chip-bg: #f0f0f0;
+    --chip-bg: #f6f6f6;
     --chip-border: #e0e0e0;
-    --chip-hover-bg: #e8e8e8;
     --green: #1b8e70;
     --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
     --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
-    --radius: 4px;
-    --radius-lg: 8px;
   }
 
   html, body {
@@ -49,81 +46,78 @@
     min-height: 100vh;
   }
 
-  /* ── header / nav ─────────────────────────────── */
+  /* ── nav — matches marketing Nav.tsx exactly ─────── */
   header {
     width: 100%;
+    height: 72px;
     position: sticky;
     top: 0;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255,255,255,0.96);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    height: 72px;
     display: flex;
     align-items: center;
-    justify-content: center;
   }
 
-  .header-inner {
+  .nav-inner {
     width: 100%;
-    max-width: 680px;
+    max-width: 1440px;
+    margin: 0 auto;
     padding: 0 24px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 12px;
   }
 
-  .logo-mark {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius);
-    background: var(--primary);
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-left span {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--font-body);
+  }
+
+  .nav-center {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
   }
 
-  .logo-mark svg {
-    width: 18px;
-    height: 17px;
+  /* arnio* wordmark */
+  .nav-logo {
+    height: 44px;
+    width: auto;
+    display: block;
   }
 
-  .header-text {
-    flex: 1;
-  }
-
-  .header-text h1 {
-    font-family: var(--font-serif);
-    font-size: 17px;
-    font-weight: 400;
-    color: var(--text);
-    letter-spacing: 0;
-    line-height: 1.2;
-  }
-
-  .header-text p {
-    font-size: 11px;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-weight: 400;
-    letter-spacing: 0.02em;
+  .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
   }
 
   .status-pill {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 10px;
+    padding: 5px 12px;
     border: 1px solid var(--border);
     border-radius: 20px;
     background: var(--surface);
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 500;
     color: var(--muted);
-    font-family: var(--font-body);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
   }
 
   .status-dot {
@@ -131,32 +125,66 @@
     height: 6px;
     border-radius: 50%;
     background: var(--green);
-    box-shadow: 0 0 6px rgba(27, 142, 112, 0.5);
+    box-shadow: 0 0 6px rgba(27,142,112,0.45);
     animation: pulse 2.5s ease-in-out infinite;
     flex-shrink: 0;
   }
 
   @keyframes pulse {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.45; }
+    50%       { opacity: 0.4; }
   }
 
-  /* ── main / chat ──────────────────────────────── */
-  main {
+  /* ── page wrapper ─────────────────────────────────── */
+  .page-wrap {
     width: 100%;
-    max-width: 680px;
+    max-width: 1200px;
+    padding: 64px 32px;
+    margin: 0 auto;
     flex: 1;
     display: flex;
+    gap: 64px;
+    align-items: flex-start;
+  }
+
+  /* ── sticky sidebar ───────────────────────────────── */
+  .sidebar {
+    flex-shrink: 0;
+    width: 300px;
+    position: sticky;
+    top: 88px;
+  }
+
+  .sidebar h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(48px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1.04;
+    color: #000;
+    margin: 0 0 16px;
+  }
+
+  .sidebar p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 240px;
+  }
+
+  /* ── chat column ──────────────────────────────────── */
+  .chat-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
     flex-direction: column;
-    padding: 0 24px;
+    gap: 0;
   }
 
   #chat {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 28px 0 16px;
+    padding-bottom: 16px;
   }
 
   .msg {
@@ -175,9 +203,9 @@
   .msg.agent { align-items: flex-start; }
 
   .bubble {
-    max-width: 88%;
-    padding: 12px 16px;
-    font-size: 14px;
+    max-width: 90%;
+    padding: 13px 17px;
+    font-size: 14.5px;
     line-height: 1.65;
     white-space: pre-wrap;
   }
@@ -185,21 +213,20 @@
   .msg.agent .bubble {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius) var(--radius-lg) var(--radius-lg) var(--radius-lg);
+    border-radius: 4px 10px 10px 10px;
     color: var(--text);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
 
   .msg.user .bubble {
     background: var(--user-bg);
     color: var(--user-fg);
-    border-radius: var(--radius-lg) var(--radius) var(--radius-lg) var(--radius-lg);
-    font-size: 13.5px;
+    border-radius: 10px 4px 10px 10px;
+    font-size: 14px;
   }
 
   .msg-label {
     font-size: 10px;
-    font-family: var(--font-body);
     font-weight: 500;
     color: var(--muted2);
     padding: 0 4px;
@@ -207,19 +234,19 @@
     text-transform: uppercase;
   }
 
-  /* ── quick chips ──────────────────────────────── */
+  /* ── quick chips ──────────────────────────────────── */
   .quick-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
-    padding: 2px 0 8px;
+    padding: 4px 0 24px;
   }
 
   .chip {
-    font-size: 12px;
+    font-size: 12.5px;
     font-family: var(--font-body);
     font-weight: 400;
-    padding: 6px 13px;
+    padding: 6px 14px;
     border-radius: 20px;
     border: 1px solid var(--chip-border);
     background: var(--chip-bg);
@@ -230,46 +257,33 @@
   }
 
   .chip:hover {
-    background: var(--chip-hover-bg);
+    background: #ebebeb;
     border-color: #c8c8c8;
     color: var(--text);
   }
 
-  /* ── thinking animation ───────────────────────── */
-  .thinking {
-    display: flex;
-    gap: 5px;
-    padding: 4px 0;
-    align-items: center;
-  }
+  /* ── thinking ─────────────────────────────────────── */
+  .thinking { display: flex; gap: 5px; padding: 4px 0; align-items: center; }
 
   .dot {
-    width: 5px;
-    height: 5px;
+    width: 5px; height: 5px;
     border-radius: 50%;
     background: var(--muted2);
     animation: blink 1.2s ease-in-out infinite;
   }
-
   .dot:nth-child(2) { animation-delay: 0.2s; }
   .dot:nth-child(3) { animation-delay: 0.4s; }
 
   @keyframes blink {
     0%, 80%, 100% { opacity: 0.2; }
-    40% { opacity: 1; }
+    40%           { opacity: 1; }
   }
 
-  /* ── footer / input ───────────────────────────── */
-  footer {
-    width: 100%;
-    max-width: 680px;
-    padding: 12px 24px 28px;
-    border-top: 1px solid var(--border);
-    background: rgba(246, 246, 246, 0.96);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    position: sticky;
-    bottom: 0;
+  /* ── input bar ────────────────────────────────────── */
+  .input-wrap {
+    border-top: 1px solid var(--border2);
+    padding-top: 20px;
+    margin-top: 8px;
   }
 
   .input-row {
@@ -280,9 +294,9 @@
 
   textarea {
     flex: 1;
-    background: var(--surface);
+    background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    border-radius: 8px;
     padding: 11px 14px;
     font-size: 14px;
     font-family: var(--font-body);
@@ -299,96 +313,157 @@
   textarea:focus {
     outline: none;
     border-color: #999;
-    box-shadow: 0 0 0 3px rgba(26, 31, 26, 0.06);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
   }
 
   button#send {
     height: 44px;
-    padding: 0 20px;
-    background: var(--primary);
-    border: 2px solid var(--primary);
-    border-radius: var(--radius);
-    font-size: 13px;
+    padding: 0 22px;
+    background: #000;
+    border: 2px solid #000;
+    border-radius: 4px;
+    font-size: 13.5px;
     font-weight: 500;
     font-family: var(--font-body);
-    color: var(--primary-fg);
+    color: #fff;
     cursor: pointer;
     transition: opacity 0.12s;
     white-space: nowrap;
     flex-shrink: 0;
-    letter-spacing: 0.01em;
   }
 
   button#send:hover    { opacity: 0.80; }
-  button#send:active   { opacity: 0.70; }
+  button#send:active   { opacity: 0.65; }
   button#send:disabled { opacity: 0.35; cursor: not-allowed; }
 
+  /* ── footer ───────────────────────────────────────── */
+  footer {
+    width: 100%;
+    border-top: 1px solid var(--border);
+    padding: 28px 32px;
+    background: var(--bg);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
   .footer-note {
-    font-size: 11px;
-    font-family: var(--font-body);
-    font-weight: 400;
+    font-size: 12px;
     color: var(--muted2);
-    margin-top: 10px;
-    text-align: center;
     letter-spacing: 0.02em;
   }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
 
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    .page-wrap { flex-direction: column; gap: 32px; padding: 32px 20px; }
+    .sidebar { width: 100%; position: static; }
+    .sidebar h1 { font-size: 40px; }
+    .nav-left span { display: none; }
+  }
 </style>
 </head>
 <body>
 
+<!-- nav — three-column grid matching marketing Nav.tsx -->
 <header>
-  <div class="header-inner">
-    <div class="logo-mark">
-      <!-- Arnio icon mark — white paths on black -->
-      <svg viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15.8976 0.00482422C15.966 0.00326347 16.0345 0.00170272 16.1049 9.46794e-05C16.744 -0.00413271 17.3278 0.133103 17.8956 0.431954C17.9484 0.459333 17.9484 0.459333 18.0022 0.487263C18.8046 0.918694 19.4052 1.54141 19.8604 2.33554C19.8905 2.38642 19.8905 2.38642 19.9213 2.43833C20.4599 3.42623 20.5622 4.74472 20.2687 5.8249C19.9787 6.75982 19.487 7.55876 18.9293 8.34942C18.5711 8.8603 18.2278 9.38082 17.8856 9.9028C17.8264 9.99293 17.7672 10.083 17.708 10.1731C17.5926 10.3487 17.4773 10.5243 17.362 10.7C17.1526 11.019 16.9426 11.3376 16.7325 11.6561C16.6246 11.8197 16.5168 11.9833 16.4089 12.1469C16.3871 12.1801 16.3652 12.2133 16.3427 12.2475C16.1998 12.4643 16.0571 12.6813 15.9144 12.8982C15.7792 13.1038 15.6439 13.3094 15.5086 13.5149C15.4795 13.5591 15.4504 13.6034 15.4204 13.6489C15.0619 14.1937 14.7019 14.7374 14.3395 15.2796C14.3052 15.3309 14.2708 15.3823 14.2355 15.4352C14.0694 15.6837 13.9031 15.9321 13.7365 16.1803C13.4338 16.6324 13.1376 17.087 12.854 17.5517C12.7047 17.7954 12.5481 18.028 12.3737 18.2537C12.3197 18.3251 12.2657 18.3965 12.2118 18.4679C12.1841 18.5044 12.1565 18.5409 12.128 18.5785C12.0037 18.7444 11.8823 18.9124 11.7609 19.0804C11.2318 19.8121 10.6946 20.5157 10.0731 21.1696C10.041 21.2039 10.0088 21.2382 9.97564 21.2735C9.47979 21.8004 8.96878 22.2703 8.37101 22.6763C8.33617 22.7001 8.30133 22.7237 8.26543 22.7482C7.63553 23.1674 6.95782 23.4596 6.24335 23.6988C6.20239 23.7125 6.16144 23.7263 6.11926 23.7405C5.46271 23.9464 4.7798 23.9344 4.09907 23.9376C4.05336 23.9379 4.00765 23.9383 3.96056 23.9386C2.88939 23.9435 1.95501 23.7857 1.08378 23.1068C1.02782 23.0658 0.971872 23.0247 0.914229 22.9824C0.315784 22.4039 0.0188129 21.604 0 20.7761C0.0260946 19.7381 0.38138 18.8378 0.958835 17.9929C1.04806 17.8613 1.13527 17.7285 1.22257 17.5956C1.46436 17.2282 1.70861 16.8625 1.95319 16.497C2.03356 16.3769 2.1139 16.2568 2.19424 16.1367C2.44344 15.7641 2.69285 15.3917 2.94298 15.0197C3.02472 14.8982 3.10645 14.7766 3.18816 14.6551C3.20813 14.6254 3.22809 14.5957 3.24866 14.5651C3.50039 14.1905 3.75018 13.8147 3.99809 13.4376C4.02423 13.3978 4.05038 13.358 4.07731 13.3171C4.20453 13.1235 4.33156 12.9299 4.45834 12.736C4.69241 12.3788 4.93111 12.0274 5.18239 11.6822C5.35452 11.4413 5.51638 11.1935 5.67851 10.9456C5.74005 10.8516 5.80176 10.7575 5.86346 10.6636C6.02867 10.4122 6.19351 10.1605 6.35835 9.90877C6.7541 9.30468 7.15319 8.70403 7.56612 8.11173C7.80925 7.76217 8.04457 7.40782 8.27803 7.05153C8.56681 6.61114 8.85915 6.17322 9.15223 5.73578C9.1767 5.69925 9.20117 5.66276 9.22633 5.62515C9.50649 5.20711 9.78697 4.78931 10.0709 4.37385C10.2168 4.16009 10.3611 3.94528 10.5049 3.73002C10.5448 3.67035 10.5847 3.61068 10.6246 3.55101C10.7021 3.43525 10.7793 3.31936 10.8564 3.20339C11.8809 1.6718 13.0998 0.412866 14.9572 0.0458136C15.2693 0.00121713 15.5829 0.00716066 15.8976 0.00482422Z" fill="white"/>
-        <path d="M23.2993 15.528C23.4338 15.6469 23.5627 15.7695 23.6902 15.8961C23.7306 15.9357 23.7711 15.9753 23.8128 16.0161C24.3051 16.5306 24.6652 17.1996 24.8604 17.8871C24.8793 17.9473 24.8982 18.0075 24.9177 18.0696C25.0002 18.4108 24.9842 18.7623 24.9834 19.1113C24.9843 19.181 24.9851 19.2506 24.986 19.3224C24.9862 19.7648 24.9387 20.1556 24.8072 20.5777C24.7897 20.6339 24.7897 20.6339 24.7719 20.6913C24.3848 21.8497 23.5879 22.8495 22.4992 23.3982C21.3376 23.9519 19.981 24.1466 18.7415 23.7149C17.4805 23.2386 16.527 22.3415 15.961 21.1131C15.5148 20.0926 15.385 18.6968 15.7889 17.6391C15.816 17.5789 15.8431 17.5187 15.871 17.4566C15.8987 17.392 15.9263 17.3273 15.9547 17.2607C16.4882 16.0982 17.4396 15.1726 18.6345 14.7273C18.7456 14.6882 18.8572 14.6509 18.9694 14.6147C19.0039 14.6035 19.0385 14.5924 19.0741 14.5809C20.5241 14.1391 22.1503 14.5813 23.2993 15.528Z" fill="white"/>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <span>Team Agent</span>
+    </div>
+
+    <div class="nav-center">
+      <!-- arnio* wordmark — logo.svg from (marketing)/images/ -->
+      <svg class="nav-logo" viewBox="0 0 2355 1300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Arnio">
+        <path d="M2355 533.46H2165.25L2345.75 474.868L2340.73 459.491L2160.33 518.184L2313.79 406.627L2304.35 393.662L2150.88 505.118L2262.34 351.653L2249.37 342.206L2137.82 495.671L2196.51 315.271L2181.13 310.246L2122.54 490.747V301H2106.46V490.747L2047.87 310.246L2032.49 315.271L2091.18 495.671L1979.63 342.206L1966.66 351.653L2078.12 505.118L1924.65 393.662L1915.21 406.627L2068.67 518.184L1888.27 459.491L1883.25 474.868L2063.75 533.46H1874V549.54H2063.75L1883.25 608.132L1888.27 623.509L2068.67 564.816L1915.21 676.373L1924.65 689.338L2078.12 577.882L1966.66 731.347L1979.63 740.794L2091.18 587.329L2032.49 767.729L2047.87 772.754L2106.46 592.253V782H2122.54V592.253L2181.13 772.754L2196.51 767.729L2137.82 587.329L2249.37 740.794L2262.34 731.347L2150.88 577.882L2304.35 689.338L2313.79 676.373L2160.33 564.816L2340.73 623.509L2345.75 608.132L2165.25 549.54H2355V533.46Z" fill="black"/>
+        <path d="M120 999C92 999 69 990.333 51 973C33 955 24 931.333 24 902C24 873.333 33 846.333 51 821C69 795 93.6667 771.667 125 751C156.333 730.333 192 713.667 232 701C240.667 698.333 245 692.667 245 684V593C245 561 240 538.333 230 525C220 511 206.333 504 189 504C172.333 504 157 511.667 143 527C129.667 541.667 120 566.667 114 602C110.667 623.333 103.333 639 92 649C81.3333 658.333 70.3333 663 59 663C40.3333 663 31 653.667 31 635C31 615.667 36.3333 596.667 47 578C58.3333 558.667 73 541.333 91 526C109 510 128.667 497.333 150 488C171.333 478.667 192.667 474 214 474C280 474 313 512.333 313 589V895C313 923 320 937 334 937C342.667 937 350.667 931.333 358 920C365.333 908 369 888 369 860C369 849.333 373.333 844 382 844C390 844 394 849.667 394 861C394 909.667 385.333 945 368 967C351.333 988.333 332.333 999 311 999C295 999 282.333 992.667 273 980C263.667 966.667 257.333 951 254 933C253.333 926.333 250.333 923 245 923C240.333 922.333 235.667 925.333 231 932C215 954 198.667 970.667 182 982C165.333 993.333 144.667 999 120 999ZM147 953C164.333 953 180.333 947 195 935C209.667 922.333 221.667 905.667 231 885C240.333 864.333 245 841 245 815V742C245 729.333 238 725.667 224 731C183.333 745.667 151.667 766 129 792C107 817.333 96 848 96 884C96 930 113 953 147 953ZM553.414 544C580.747 497.333 613.747 474 652.414 474C674.414 474 690.747 480.667 701.414 494C712.081 506.667 717.414 521 717.414 537C717.414 549.667 714.081 560 707.414 568C701.414 576 691.747 580 678.414 580C667.747 580 659.747 577.667 654.414 573C649.747 567.667 645.747 561.667 642.414 555C639.747 548.333 636.414 542.667 632.414 538C628.414 532.667 621.747 530 612.414 530C600.414 530 589.081 537.333 578.414 552C567.747 566 558.747 585 551.414 609C544.747 633 541.414 660.333 541.414 691V923C541.414 937 543.414 947 547.414 953C552.081 959 561.414 962.667 575.414 964L602.414 967C609.747 968.333 613.414 972 613.414 978C613.414 986 608.414 990 598.414 990H429.414C419.414 990 414.414 986.333 414.414 979C414.414 973 418.747 969 427.414 967L439.414 965C453.414 962.333 462.414 958.333 466.414 953C471.081 947 473.414 937 473.414 923V587C473.414 575 471.414 567 467.414 563C464.081 558.333 457.747 555.333 448.414 554L427.414 551C418.747 550.333 414.414 546.667 414.414 540C414.414 534.667 419.747 531 430.414 529C451.081 525.667 466.747 520.333 477.414 513C488.747 505.667 500.414 496.667 512.414 486C518.414 480 523.414 477 527.414 477C533.414 477 536.414 481 536.414 489V543C536.414 547.667 538.414 550.667 542.414 552C546.414 552.667 550.081 550 553.414 544ZM747.773 990C737.773 990 732.773 986.333 732.773 979C732.773 973 737.107 969 745.773 967L757.773 965C771.773 962.333 780.773 958.333 784.773 953C789.44 947 791.773 937 791.773 923V587C791.773 575 789.773 567 785.773 563C782.44 558.333 776.107 555.333 766.773 554L745.773 551C737.107 550.333 732.773 546.667 732.773 540C732.773 534.667 738.107 531 748.773 529C769.44 525.667 785.107 520.333 795.773 513C807.107 505.667 818.773 496.667 830.773 486C836.773 480 841.773 477 845.773 477C851.773 477 854.773 481 854.773 489V534C854.773 540 856.773 544 860.773 546C865.44 547.333 870.44 545.333 875.773 540C902.44 514.667 925.773 497.333 945.773 488C966.44 478.667 988.107 474 1010.77 474C1040.77 474 1064.77 484.667 1082.77 506C1100.77 526.667 1109.77 557.333 1109.77 598V923C1109.77 937 1111.77 947 1115.77 953C1120.44 958.333 1129.77 962 1143.77 964L1165.77 967C1173.11 968.333 1176.77 972.333 1176.77 979C1176.77 986.333 1172.77 990 1164.77 990H996.773C987.44 990 982.773 986.333 982.773 979C982.773 972.333 986.44 968.333 993.773 967L1007.77 965C1021.77 963 1030.77 959 1034.77 953C1039.44 947 1041.77 937 1041.77 923V609C1041.77 576.333 1035.77 553.333 1023.77 540C1011.77 526.667 994.773 520 972.773 520C951.44 520 932.107 526.333 914.773 539C898.107 551 884.773 567.333 874.773 588C864.773 608 859.773 630.333 859.773 655V923C859.773 937 861.773 947 865.773 953C870.44 959 879.773 962.667 893.773 964L920.773 967C928.107 968.333 931.773 972 931.773 978C931.773 986 926.773 990 916.773 990H747.773ZM1301.5 385C1287.5 385 1275.5 380 1265.5 370C1256.17 360 1251.5 347.333 1251.5 332C1251.5 316.667 1256.17 304.333 1265.5 295C1275.5 285 1287.5 280 1301.5 280C1315.5 280 1327.17 285 1336.5 295C1345.83 304.333 1350.5 316.667 1350.5 332C1350.5 347.333 1345.83 360 1336.5 370C1327.17 380 1315.5 385 1301.5 385ZM1217.5 990C1207.5 990 1202.5 986.333 1202.5 979C1202.5 973 1206.83 969 1215.5 967L1227.5 965C1244.17 962.333 1254.83 958.333 1259.5 953C1264.17 947 1266.5 937 1266.5 923V587C1266.5 575 1264.5 567 1260.5 563C1257.17 558.333 1250.83 555.333 1241.5 554L1220.5 551C1211.83 550.333 1207.5 546.667 1207.5 540C1207.5 534.667 1212.83 531 1223.5 529C1244.17 525.667 1260.83 520.333 1273.5 513C1286.17 505.667 1298.5 496.667 1310.5 486C1316.5 480 1321.5 477 1325.5 477C1331.5 477 1334.5 481 1334.5 489V923C1334.5 937 1336.5 947 1340.5 953C1344.5 959 1352.17 962.667 1363.5 964L1388.5 967C1395.83 968.333 1399.5 972 1399.5 978C1399.5 986 1394.5 990 1384.5 990H1217.5ZM1613.16 999C1579.16 999 1548.49 987.667 1521.16 965C1494.49 941.667 1473.16 910 1457.16 870C1441.16 830 1433.16 785.333 1433.16 736C1433.16 686.667 1441.16 642.333 1457.16 603C1473.16 563.667 1494.82 532.333 1522.16 509C1549.49 485.667 1579.82 474 1613.16 474C1647.16 474 1677.49 485.667 1704.16 509C1731.49 532.333 1753.16 563.667 1769.16 603C1785.16 642.333 1793.16 686.667 1793.16 736C1793.16 785.333 1785.16 830 1769.16 870C1753.82 910 1732.49 941.667 1705.16 965C1677.82 987.667 1647.16 999 1613.16 999ZM1613.16 974C1682.49 974 1717.16 894.667 1717.16 736C1717.16 578 1682.49 499 1613.16 499C1543.82 499 1509.16 578 1509.16 736C1509.16 894.667 1543.82 974 1613.16 974Z" fill="black"/>
       </svg>
     </div>
-    <div class="header-text">
-      <h1>Arnio Team Agent</h1>
-      <p>onboarding · support · ops</p>
-    </div>
-    <div class="status-pill">
-      <div class="status-dot"></div>
-      online
+
+    <div class="nav-right">
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        online
+      </div>
     </div>
   </div>
 </header>
 
-<main>
-  <div id="chat">
-    <div class="msg agent">
-      <span class="msg-label">agent</span>
-      <div class="bubble">Hey — I'm your Arnio onboarding agent. I know everything about how Arnio works: the product, clients, tools, servers, and your daily tasks.
+<!-- two-column layout matching terms/pricing page -->
+<div class="page-wrap">
+
+  <!-- sticky sidebar -->
+  <aside class="sidebar">
+    <h1>Team<br>Agent</h1>
+    <p>Ask anything about Arnio — the product, your daily tasks, clients, tools, or how to escalate.</p>
+  </aside>
+
+  <!-- chat column -->
+  <div class="chat-col">
+    <div id="chat">
+      <div class="msg agent">
+        <span class="msg-label">agent</span>
+        <div class="bubble">Hey — I'm your Arnio onboarding agent. I know everything about how Arnio works: the product, clients, tools, and your daily tasks.
 
 Ask me anything, or pick a topic below to get started.</div>
+      </div>
+      <div class="quick-chips">
+        <button class="chip" onclick="quickAsk('What is Arnio and what does it do?')">What is Arnio?</button>
+        <button class="chip" onclick="quickAsk('What are my daily tasks and responsibilities?')">My daily tasks</button>
+        <button class="chip" onclick="quickAsk('Who are the current clients and how do I support them?')">Current clients</button>
+        <button class="chip" onclick="quickAsk('How does Slack triage work at Arnio?')">Slack triage</button>
+        <button class="chip" onclick="quickAsk('What tools do I need and what are they for?')">Tools</button>
+        <button class="chip" onclick="quickAsk('When should I escalate something to Greg?')">When to escalate</button>
+        <button class="chip" onclick="quickAsk('What is the difference between staging and production at Arnio?')">Environments</button>
+        <button class="chip" onclick="quickAsk('Walk me through all the features built in the Arnio dashboard today.')">Dashboard features</button>
+      </div>
     </div>
-    <div class="quick-chips">
-      <button class="chip" onclick="quickAsk('What is Arnio and what does it do?')">What is Arnio?</button>
-      <button class="chip" onclick="quickAsk('What are my daily tasks and responsibilities?')">My daily tasks</button>
-      <button class="chip" onclick="quickAsk('Who are the current clients and how do I support them?')">Current clients</button>
-      <button class="chip" onclick="quickAsk('How does Slack triage work at Arnio?')">Slack triage</button>
-      <button class="chip" onclick="quickAsk('What tools do I need to use and what are they for?')">Tools & tools</button>
-      <button class="chip" onclick="quickAsk('When should I escalate something to Greg vs handle it myself?')">When to escalate</button>
+
+    <div class="input-wrap">
+      <div class="input-row">
+        <textarea id="input" placeholder="Ask anything about Arnio..." rows="1"></textarea>
+        <button id="send" onclick="send()">Send →</button>
+      </div>
     </div>
   </div>
-</main>
+
+</div>
 
 <footer>
-  <div class="input-row">
-    <textarea id="input" placeholder="Ask anything about Arnio..." rows="1"></textarea>
-    <button id="send" onclick="send()">Send →</button>
+  <div class="footer-inner">
+    <span class="footer-note">arnio.co — internal team use only</span>
+    <div class="footer-links">
+      <a href="https://arnio.co" target="_blank" rel="noopener noreferrer">arnio.co</a>
+      <a href="mailto:hello@arnio.co">hello@arnio.co</a>
+    </div>
   </div>
-  <p class="footer-note">arnio.co — internal team use only</p>
 </footer>
 
 <script>
-const SYSTEM = `You are the Arnio Team Agent. You help new team members understand Arnio, their daily responsibilities, and how to handle tasks. Be conversational, clear, and concise. Use short bullet points. No markdown headers, no bold symbols, no hashtags. Just clean plain text with bullet points.
+const SYSTEM = `You are the Arnio Team Agent. You help new team members understand Arnio, their daily responsibilities, and how to handle tasks. Be conversational, clear, and concise. Use short bullet points with the bullet character. No dashes, no markdown headers, no bold symbols, no hashtags. Just clean plain text with bullet points.
 
 WHAT IS ARNIO
 
@@ -400,103 +475,103 @@ One line version: Arnio helps ecommerce brands identify high-intent visitors acr
 
 HOW IT WORKS
 
-- Tracks visitor engagement across Meta, Instagram, TikTok, DMs, ManyChat, email, SMS, and Shopify
-- Scores each visitor by buying intent based on behavior like product views, cart activity, return visits, and checkout behavior
-- Intent thresholds: 0-29 low, 30-59 engaged, 60-79 high intent, 80+ ready to buy
-- Only attempts identity resolution at 60+ intent score
-- Only routes to Klaviyo at 70+ intent score
-- Arnio is not an email platform. Klaviyo handles execution. Arnio just tells Klaviyo who to contact and when.
+• Tracks visitor engagement across Meta, Instagram, TikTok, DMs, ManyChat, email, SMS, and Shopify
+• Scores each visitor by buying intent based on behavior like product views, cart activity, return visits, and checkout behavior
+• Intent thresholds: 0-29 low, 30-59 engaged, 60-79 high intent, 80+ ready to buy
+• Only attempts identity resolution at 60+ intent score
+• Only routes to Klaviyo at 70+ intent score
+• Arnio is not an email platform. Klaviyo handles execution. Arnio just tells Klaviyo who to contact and when.
 
 CURRENT DESIGN PARTNERS
 
-- getRally
-- Legendairy Milk
-- Hair Supplies
+• getRally
+• Legendairy Milk
+• Hair Supplies
 
 SOCIAL CHANNELS
 
-- Instagram (main lead source)
-- ManyChat (automated DMs)
-- YouTube Shorts
+• Instagram (main lead source)
+• ManyChat (automated DMs)
+• YouTube Shorts
 
 TECH STACK (for reference only, do not touch without Greg)
 
-- Frontend: Next.js hosted on Vercel
-- Backend: Express/TypeScript hosted on Render
-- Database: Neon Postgres with Drizzle ORM
-- Auth: Clerk
-- Email: Resend
-- Payments: Stripe
-- Analytics: PostHog
-- Errors: Sentry
-- Customer Support: Intercom
-- DNS: Cloudflare
+• Frontend: Next.js hosted on Vercel
+• Backend: Express/TypeScript hosted on Render
+• Database: Neon Postgres with Drizzle ORM
+• Auth: Clerk
+• Email: Resend
+• Payments: Stripe
+• Analytics: PostHog
+• Errors: Sentry
+• Customer Support: Intercom
+• DNS: Cloudflare
 
 YOUR DAILY TASKS
 
-- Check Slack every morning and respond to any client messages
-- Flag anything urgent to Greg before acting
-- Monitor ManyChat for new leads coming in from Instagram
-- Help manage Greg's Google Calendar, flag conflicts, prep reminders
-- Support the Instantly outreach pipeline once it is set up
+• Check Slack every morning and respond to any client messages
+• Flag anything urgent to Greg before acting
+• Monitor ManyChat for new leads coming in from Instagram
+• Help manage Greg's Google Calendar, flag conflicts, prep reminders
+• Support the Instantly outreach pipeline once it is set up
 
 ESCALATION RULES
 
-- Any client complaint goes to Greg first before you respond
-- Never touch any client account or platform without Greg's approval
-- If something is broken or urgent, DM Greg immediately on Slack
-- When in doubt, ask Greg first and act second
+• Any client complaint goes to Greg first before you respond
+• Never touch any client account or platform without Greg's approval
+• If something is broken or urgent, DM Greg immediately on Slack
+• When in doubt, ask Greg first and act second
 
 ENVIRONMENTS
 
-- Staging: staging.arnio.co — use this to test things before they go live
-- Production: app.arnio.co — live environment, real user data, be careful here
-- Never make changes directly in production without testing in staging first
-- If you are unsure which environment to use, ask Greg
+• Staging: staging.arnio.co — use this to test things before they go live
+• Production: app.arnio.co — live environment, real user data, be careful here
+• Never make changes directly in production without testing in staging first
+• If you are unsure which environment to use, ask Greg
 
 ARNIO DASHBOARD — FEATURES BUILT TODAY
 
 Home Tab
-- KPI cards: Visitors Detected, Engaged Visitors, Identified Shoppers, Revenue Recovered
-- Visitors detected over time chart
-- Time-based personalized greeting (Good morning / afternoon / evening / late night)
-- First visit vs returning user detection
+• KPI cards: Visitors Detected, Engaged Visitors, Identified Shoppers, Revenue Recovered
+• Visitors detected over time chart
+• Time-based personalized greeting (Good morning / afternoon / evening / late night)
+• First visit vs returning user detection
 
 Performance Tab
-- Channel breakdown table: Meta, Instagram, TikTok, Organic, Direct
-- Intent signals table: ad clicks, product views, cart adds, and more
-- Date range filter: 7d, 30d, 90d
-- Channel filter
-- Empty states when no data is available yet
+• Channel breakdown table: Meta, Instagram, TikTok, Organic, Direct
+• Intent signals table: ad clicks, product views, cart adds, and more
+• Date range filter: 7d, 30d, 90d
+• Channel filter
+• Empty states when no data is available yet
 
 Activity Tab
-- Full log of every shopper interaction
-- Filters: All, Handled, Needs Setup, Missed
-- Status badges per event
+• Full log of every shopper interaction
+• Filters: All, Handled, Needs Setup, Missed
+• Status badges per event
 
 Settings Tab
-- Sign-in Preferences and Integrations
-- Safe Routing controls: toggle on/off, daily limit, score threshold, pause
-- Plan and Billing
+• Sign-in Preferences and Integrations
+• Safe Routing controls: toggle on/off, daily limit, score threshold, pause
+• Plan and Billing
 
 Auth and Onboarding
-- Clerk authentication with Google SSO
-- Shopify OAuth connection
-- Klaviyo API key connection
-- Store setup flow
+• Clerk authentication with Google SSO
+• Shopify OAuth connection
+• Klaviyo API key connection
+• Store setup flow
 
 Backend
-- Intent scoring: Low (0-29), Engaged (30-59), High Intent (60-79), Ready to Buy (80+)
-- Routing queue with daily limits
-- Shopper profiles per store
-- All data scoped by store_id
+• Intent scoring: Low (0-29), Engaged (30-59), High Intent (60-79), Ready to Buy (80+)
+• Routing queue with daily limits
+• Shopper profiles per store
+• All data scoped by store_id
 
 ABOUT GREG
 
-- Greg Jones, Founder and CEO of Arnio
-- Solo founder
-- Direct communication style, keep things short and to the point
-- He is focused on development and content, only interrupt for urgent issues
+• Greg Jones, Founder and CEO of Arnio
+• Solo founder
+• Direct communication style, keep things short and to the point
+• He is focused on development and content, only interrupt for urgent issues
 
 If you do not know the answer to something, say so and tell the team member to ask Greg directly on Slack.`;
 
