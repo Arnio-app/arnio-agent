@@ -4,26 +4,32 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Arnio Team Agent</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --surface2: #181818;
-    --border: #222222;
-    --border2: #2e2e2e;
-    --text: #f0f0f0;
-    --muted: #666;
-    --muted2: #444;
-    --accent: #c8f080;
-    --accent-dim: rgba(200, 240, 128, 0.08);
-    --accent-dim2: rgba(200, 240, 128, 0.14);
-    --user-bg: #1a1f12;
-    --user-border: #2d3a1a;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'DM Mono', monospace;
+    --bg: #f6f6f6;
+    --surface: #ffffff;
+    --border: #e0e0e0;
+    --border2: #eeeeee;
+    --text: #1a1f1a;
+    --muted: #808580;
+    --muted2: #b0b5b0;
+    --primary: #1a1f1a;
+    --primary-fg: #ffffff;
+    --user-bg: #1a1f1a;
+    --user-fg: #ffffff;
+    --chip-bg: #f0f0f0;
+    --chip-border: #e0e0e0;
+    --chip-hover-bg: #e8e8e8;
+    --green: #1b8e70;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+    --radius: 4px;
+    --radius-lg: 8px;
   }
 
   html, body {
@@ -41,65 +47,101 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    padding: 0;
   }
 
+  /* ── header / nav ─────────────────────────────── */
   header {
     width: 100%;
-    max-width: 680px;
-    padding: 28px 24px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 14px;
     position: sticky;
     top: 0;
-    background: var(--bg);
     z-index: 10;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .logo {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--accent-dim2);
-    border: 1px solid rgba(200, 240, 128, 0.25);
+  .header-inner {
+    width: 100%;
+    max-width: 680px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius);
+    background: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
 
-  .logo svg { width: 18px; height: 18px; }
+  .logo-mark svg {
+    width: 18px;
+    height: 17px;
+  }
+
+  .header-text {
+    flex: 1;
+  }
 
   .header-text h1 {
-    font-size: 15px;
-    font-weight: 500;
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 400;
     color: var(--text);
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
+    line-height: 1.2;
   }
 
   .header-text p {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--muted);
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    font-family: var(--font-body);
+    letter-spacing: 0.02em;
   }
 
   .status-dot {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--accent);
-    margin-left: auto;
-    box-shadow: 0 0 8px var(--accent);
+    background: var(--green);
+    box-shadow: 0 0 6px rgba(27, 142, 112, 0.5);
     animation: pulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
   }
 
   @keyframes pulse {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    50% { opacity: 0.45; }
   }
 
+  /* ── main / chat ──────────────────────────────── */
   main {
     width: 100%;
     max-width: 680px;
@@ -114,29 +156,27 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 24px 0 16px;
-    overflow-y: auto;
+    padding: 28px 0 16px;
   }
 
   .msg {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    animation: fadeUp 0.2s ease;
+    gap: 5px;
+    animation: fadeUp 0.18s ease;
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .msg.user { align-items: flex-end; }
+  .msg.user  { align-items: flex-end; }
   .msg.agent { align-items: flex-start; }
 
   .bubble {
     max-width: 88%;
-    padding: 11px 15px;
-    border-radius: 14px;
+    padding: 12px 16px;
     font-size: 14px;
     line-height: 1.65;
     white-space: pre-wrap;
@@ -145,58 +185,61 @@
   .msg.agent .bubble {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 4px 14px 14px 14px;
+    border-radius: var(--radius) var(--radius-lg) var(--radius-lg) var(--radius-lg);
     color: var(--text);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
 
   .msg.user .bubble {
     background: var(--user-bg);
-    border: 1px solid var(--user-border);
-    border-radius: 14px 4px 14px 14px;
-    color: var(--accent);
-    font-family: var(--font-mono);
-    font-size: 13px;
+    color: var(--user-fg);
+    border-radius: var(--radius-lg) var(--radius) var(--radius-lg) var(--radius-lg);
+    font-size: 13.5px;
   }
 
   .msg-label {
-    font-size: 11px;
-    font-family: var(--font-mono);
+    font-size: 10px;
+    font-family: var(--font-body);
+    font-weight: 500;
     color: var(--muted2);
     padding: 0 4px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
   }
 
+  /* ── quick chips ──────────────────────────────── */
   .quick-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 4px 0 8px;
+    gap: 7px;
+    padding: 2px 0 8px;
   }
 
   .chip {
     font-size: 12px;
-    font-family: var(--font-mono);
-    padding: 6px 12px;
+    font-family: var(--font-body);
+    font-weight: 400;
+    padding: 6px 13px;
     border-radius: 20px;
-    border: 1px solid var(--border2);
-    background: transparent;
+    border: 1px solid var(--chip-border);
+    background: var(--chip-bg);
     color: var(--muted);
     cursor: pointer;
-    transition: all 0.15s;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
     white-space: nowrap;
   }
 
   .chip:hover {
-    border-color: rgba(200, 240, 128, 0.3);
-    color: var(--accent);
-    background: var(--accent-dim);
+    background: var(--chip-hover-bg);
+    border-color: #c8c8c8;
+    color: var(--text);
   }
 
+  /* ── thinking animation ───────────────────────── */
   .thinking {
     display: flex;
     gap: 5px;
-    padding: 14px 16px;
+    padding: 4px 0;
     align-items: center;
   }
 
@@ -204,7 +247,7 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: var(--muted);
+    background: var(--muted2);
     animation: blink 1.2s ease-in-out infinite;
   }
 
@@ -216,34 +259,37 @@
     40% { opacity: 1; }
   }
 
+  /* ── footer / input ───────────────────────────── */
   footer {
     width: 100%;
     max-width: 680px;
     padding: 12px 24px 28px;
     border-top: 1px solid var(--border);
-    background: var(--bg);
+    background: rgba(246, 246, 246, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     position: sticky;
     bottom: 0;
   }
 
   .input-row {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     align-items: flex-end;
   }
 
   textarea {
     flex: 1;
     background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
     padding: 11px 14px;
     font-size: 14px;
     font-family: var(--font-body);
     color: var(--text);
     resize: none;
     line-height: 1.5;
-    transition: border-color 0.15s;
+    transition: border-color 0.12s, box-shadow 0.12s;
     min-height: 44px;
     max-height: 120px;
   }
@@ -252,32 +298,35 @@
 
   textarea:focus {
     outline: none;
-    border-color: rgba(200, 240, 128, 0.3);
+    border-color: #999;
+    box-shadow: 0 0 0 3px rgba(26, 31, 26, 0.06);
   }
 
   button#send {
     height: 44px;
-    padding: 0 18px;
-    background: var(--accent);
-    border: none;
-    border-radius: 10px;
+    padding: 0 20px;
+    background: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
     font-size: 13px;
     font-weight: 500;
-    font-family: var(--font-mono);
-    color: #0a0a0a;
+    font-family: var(--font-body);
+    color: var(--primary-fg);
     cursor: pointer;
-    transition: opacity 0.15s, transform 0.1s;
+    transition: opacity 0.12s;
     white-space: nowrap;
     flex-shrink: 0;
+    letter-spacing: 0.01em;
   }
 
-  button#send:hover { opacity: 0.88; }
-  button#send:active { transform: scale(0.97); }
+  button#send:hover    { opacity: 0.80; }
+  button#send:active   { opacity: 0.70; }
   button#send:disabled { opacity: 0.35; cursor: not-allowed; }
 
   .footer-note {
     font-size: 11px;
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
+    font-weight: 400;
     color: var(--muted2);
     margin-top: 10px;
     text-align: center;
@@ -286,27 +335,29 @@
 
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="9" cy="9" r="3" fill="#c8f080"/>
-      <circle cx="9" cy="9" r="7" stroke="#c8f080" stroke-width="1" stroke-opacity="0.4"/>
-      <circle cx="9" cy="3" r="1.2" fill="#c8f080" opacity="0.7"/>
-      <circle cx="9" cy="15" r="1.2" fill="#c8f080" opacity="0.7"/>
-      <circle cx="3" cy="9" r="1.2" fill="#c8f080" opacity="0.7"/>
-      <circle cx="15" cy="9" r="1.2" fill="#c8f080" opacity="0.7"/>
-    </svg>
+  <div class="header-inner">
+    <div class="logo-mark">
+      <!-- Arnio icon mark — white paths on black -->
+      <svg viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.8976 0.00482422C15.966 0.00326347 16.0345 0.00170272 16.1049 9.46794e-05C16.744 -0.00413271 17.3278 0.133103 17.8956 0.431954C17.9484 0.459333 17.9484 0.459333 18.0022 0.487263C18.8046 0.918694 19.4052 1.54141 19.8604 2.33554C19.8905 2.38642 19.8905 2.38642 19.9213 2.43833C20.4599 3.42623 20.5622 4.74472 20.2687 5.8249C19.9787 6.75982 19.487 7.55876 18.9293 8.34942C18.5711 8.8603 18.2278 9.38082 17.8856 9.9028C17.8264 9.99293 17.7672 10.083 17.708 10.1731C17.5926 10.3487 17.4773 10.5243 17.362 10.7C17.1526 11.019 16.9426 11.3376 16.7325 11.6561C16.6246 11.8197 16.5168 11.9833 16.4089 12.1469C16.3871 12.1801 16.3652 12.2133 16.3427 12.2475C16.1998 12.4643 16.0571 12.6813 15.9144 12.8982C15.7792 13.1038 15.6439 13.3094 15.5086 13.5149C15.4795 13.5591 15.4504 13.6034 15.4204 13.6489C15.0619 14.1937 14.7019 14.7374 14.3395 15.2796C14.3052 15.3309 14.2708 15.3823 14.2355 15.4352C14.0694 15.6837 13.9031 15.9321 13.7365 16.1803C13.4338 16.6324 13.1376 17.087 12.854 17.5517C12.7047 17.7954 12.5481 18.028 12.3737 18.2537C12.3197 18.3251 12.2657 18.3965 12.2118 18.4679C12.1841 18.5044 12.1565 18.5409 12.128 18.5785C12.0037 18.7444 11.8823 18.9124 11.7609 19.0804C11.2318 19.8121 10.6946 20.5157 10.0731 21.1696C10.041 21.2039 10.0088 21.2382 9.97564 21.2735C9.47979 21.8004 8.96878 22.2703 8.37101 22.6763C8.33617 22.7001 8.30133 22.7237 8.26543 22.7482C7.63553 23.1674 6.95782 23.4596 6.24335 23.6988C6.20239 23.7125 6.16144 23.7263 6.11926 23.7405C5.46271 23.9464 4.7798 23.9344 4.09907 23.9376C4.05336 23.9379 4.00765 23.9383 3.96056 23.9386C2.88939 23.9435 1.95501 23.7857 1.08378 23.1068C1.02782 23.0658 0.971872 23.0247 0.914229 22.9824C0.315784 22.4039 0.0188129 21.604 0 20.7761C0.0260946 19.7381 0.38138 18.8378 0.958835 17.9929C1.04806 17.8613 1.13527 17.7285 1.22257 17.5956C1.46436 17.2282 1.70861 16.8625 1.95319 16.497C2.03356 16.3769 2.1139 16.2568 2.19424 16.1367C2.44344 15.7641 2.69285 15.3917 2.94298 15.0197C3.02472 14.8982 3.10645 14.7766 3.18816 14.6551C3.20813 14.6254 3.22809 14.5957 3.24866 14.5651C3.50039 14.1905 3.75018 13.8147 3.99809 13.4376C4.02423 13.3978 4.05038 13.358 4.07731 13.3171C4.20453 13.1235 4.33156 12.9299 4.45834 12.736C4.69241 12.3788 4.93111 12.0274 5.18239 11.6822C5.35452 11.4413 5.51638 11.1935 5.67851 10.9456C5.74005 10.8516 5.80176 10.7575 5.86346 10.6636C6.02867 10.4122 6.19351 10.1605 6.35835 9.90877C6.7541 9.30468 7.15319 8.70403 7.56612 8.11173C7.80925 7.76217 8.04457 7.40782 8.27803 7.05153C8.56681 6.61114 8.85915 6.17322 9.15223 5.73578C9.1767 5.69925 9.20117 5.66276 9.22633 5.62515C9.50649 5.20711 9.78697 4.78931 10.0709 4.37385C10.2168 4.16009 10.3611 3.94528 10.5049 3.73002C10.5448 3.67035 10.5847 3.61068 10.6246 3.55101C10.7021 3.43525 10.7793 3.31936 10.8564 3.20339C11.8809 1.6718 13.0998 0.412866 14.9572 0.0458136C15.2693 0.00121713 15.5829 0.00716066 15.8976 0.00482422Z" fill="white"/>
+        <path d="M23.2993 15.528C23.4338 15.6469 23.5627 15.7695 23.6902 15.8961C23.7306 15.9357 23.7711 15.9753 23.8128 16.0161C24.3051 16.5306 24.6652 17.1996 24.8604 17.8871C24.8793 17.9473 24.8982 18.0075 24.9177 18.0696C25.0002 18.4108 24.9842 18.7623 24.9834 19.1113C24.9843 19.181 24.9851 19.2506 24.986 19.3224C24.9862 19.7648 24.9387 20.1556 24.8072 20.5777C24.7897 20.6339 24.7897 20.6339 24.7719 20.6913C24.3848 21.8497 23.5879 22.8495 22.4992 23.3982C21.3376 23.9519 19.981 24.1466 18.7415 23.7149C17.4805 23.2386 16.527 22.3415 15.961 21.1131C15.5148 20.0926 15.385 18.6968 15.7889 17.6391C15.816 17.5789 15.8431 17.5187 15.871 17.4566C15.8987 17.392 15.9263 17.3273 15.9547 17.2607C16.4882 16.0982 17.4396 15.1726 18.6345 14.7273C18.7456 14.6882 18.8572 14.6509 18.9694 14.6147C19.0039 14.6035 19.0385 14.5924 19.0741 14.5809C20.5241 14.1391 22.1503 14.5813 23.2993 15.528Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Arnio Team Agent</h1>
+      <p>onboarding · support · ops</p>
+    </div>
+    <div class="status-pill">
+      <div class="status-dot"></div>
+      online
+    </div>
   </div>
-  <div class="header-text">
-    <h1>Arnio Team Agent</h1>
-    <p>onboarding · support · ops</p>
-  </div>
-  <div class="status-dot" title="Online"></div>
 </header>
 
 <main>
@@ -425,13 +476,9 @@ async function send() {
 
   try {
     const res = await fetch('/api/chat', {
-    method: 'POST',
-     headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-  
-        system: SYSTEM,
-        messages: history
-      })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system: SYSTEM, messages: history })
     });
     const data = await res.json();
     const reply = data.content?.[0]?.text || 'Something went wrong. Try again.';
