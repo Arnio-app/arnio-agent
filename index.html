@@ -615,6 +615,8 @@ ABOUT GREG
 • Direct communication style, keep things short and to the point
 • He is focused on development and content, only interrupt for urgent issues
 
+If the user asks for a markdown file, a .md file, or a document about Arnio (for example: "give me an md file about Arnio", "send me the Arnio overview as a file", "create a markdown doc"), respond with the full markdown content and then on the very last line write exactly: [DOWNLOAD_MD:<filename>.md] replacing <filename> with a short descriptive name. Do not explain the tag. Example last line: [DOWNLOAD_MD:arnio-overview.md]
+
 If you do not know the answer to something, say so and tell the team member to ask Greg directly on Slack.`;
 
 let history = [];
@@ -644,8 +646,10 @@ async function send() {
     const data = await res.json();
     const reply = data.content?.[0]?.text || 'Something went wrong. Try again.';
     thinkDiv.remove();
-    appendMsg('agent', reply);
-    history.push({ role: 'assistant', content: reply });
+    const mdMatch = reply.match(/\[DOWNLOAD_MD:([^\]]+)\]\s*$/);
+    const cleanReply = reply.replace(/\[DOWNLOAD_MD:[^\]]+\]\s*$/, '').trim();
+    appendMsg('agent', cleanReply, mdMatch ? { filename: mdMatch[1], content: cleanReply } : null);
+    history.push({ role: 'assistant', content: cleanReply });
   } catch (e) {
     thinkDiv.remove();
     appendMsg('agent', 'Network error. Please try again.');
@@ -655,7 +659,7 @@ async function send() {
   btn.textContent = 'Send →';
 }
 
-function appendMsg(role, text) {
+function appendMsg(role, text, download) {
   const chat = document.getElementById('chat');
   const wrap = document.createElement('div');
   wrap.className = `msg ${role}`;
@@ -665,6 +669,15 @@ function appendMsg(role, text) {
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
   bubble.textContent = text;
+  if (download) {
+    const btn = document.createElement('a');
+    btn.textContent = 'Download ' + download.filename;
+    btn.style.cssText = 'display:inline-block;margin-top:12px;padding:8px 16px;background:#000;color:#fff;border-radius:6px;font-size:13px;text-decoration:none;cursor:pointer;';
+    btn.href = URL.createObjectURL(new Blob([download.content], { type: 'text/markdown' }));
+    btn.download = download.filename;
+    bubble.appendChild(document.createElement('br'));
+    bubble.appendChild(btn);
+  }
   wrap.appendChild(label);
   wrap.appendChild(bubble);
   chat.appendChild(wrap);
