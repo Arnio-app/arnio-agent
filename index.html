@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Arnio Team Agent</title>
+<title>Arnio Agent</title>
 <link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -392,7 +392,7 @@
 <header>
   <div class="nav-inner">
     <div class="nav-left">
-      <span>Team Agent</span>
+      <span>Arnio Agent</span>
     </div>
 
     <div class="nav-center">
@@ -426,7 +426,7 @@
     <div id="chat">
       <div class="msg agent">
         <span class="msg-label">agent</span>
-        <div class="bubble">Hey. I'm your Arnio onboarding agent. I know everything about how Arnio works: the product, clients, tools, and your daily tasks.
+        <div class="bubble">Hey, I'm your Arnio agent. I know everything about how Arnio works: the product, clients, tools, and your daily tasks.
 
 Ask me anything, or pick a topic below to get started.</div>
       </div>
@@ -463,7 +463,7 @@ Ask me anything, or pick a topic below to get started.</div>
 </footer>
 
 <script>
-const SYSTEM = `You are the Arnio Team Agent. You help new team members understand Arnio, their daily responsibilities, and how to handle tasks. Be conversational, clear, and concise. Use short bullet points with the bullet character. No dashes, no markdown headers, no bold symbols, no hashtags. Just clean plain text with bullet points.
+const SYSTEM = `You are the Arnio Agent. You help new team members understand Arnio, their daily responsibilities, and how to handle tasks. Be conversational, clear, and concise. Use short bullet points with the bullet character. No dashes, no markdown headers, no bold symbols, no hashtags. Just clean plain text with bullet points.
 
 WHAT IS ARNIO
 
@@ -509,12 +509,53 @@ TECH STACK (for reference only, do not touch without Greg)
 
 YOUR DAILY TASKS
 
-• Task 1: Set up email sequence in Instantly. Export all email contacts from ManyChat and import them into Instantly. The contact list includes a mix of brand owners and general contacts. Goal is to start outreaching to them, especially anyone who looks like a brand owner or ecommerce operator.
+TOP PRIORITY: ManyChat to Loop.so Cold Email Outreach Pipeline
+
+The main goal right now is to build a cold outreach pipeline to reengage our Instagram audience using ManyChat contacts and Loop.so (email platform). There are over 803 valid subscribed contacts in ManyChat. For the early test we are pulling 150 contacts and running them through an automated workflow in Loop.so. This is set to be reviewed on Tuesday June 3rd.
+
+STEP 1: Export contacts from ManyChat
+
+ManyChat does not have a smooth bulk export, so this is done manually by downloading contact data one batch at a time.
+
+How to export:
+• Go to Contacts in ManyChat
+• Set filter: Email has any value
+• Make sure contacts show status as Subscribed (there should be 803)
+• Since we have to do this manually, download 100 contacts at a time to start
+• Click on a contact, then click the 3 dots on the right side, then click Download Contact Data
+
+STEP 2: Add contacts to Google Sheets
+
+• After downloading the contact data, open Google Sheets under the Arnio Gmail account
+• Create a new sheet and add those contacts there so they are organized before uploading
+
+STEP 3: Upload contacts to Loop.so
+
+Loop.so is the email platform we use for outreach (not Instantly for this campaign).
+
+How to import in Loop.so:
+• Go to Audience
+• Click Import
+• Select CSV
+• Upload the CSV file exported from Google Sheets
+• When prompted, assign the contacts to the Manychat campaigns list
+
+STEP 4: Set up the workflow in Loop.so
+
+• Go to Workflows in Loop.so
+• Find the workflow called Manychat campaign
+• Add the email content to the workflow
+• Note: the workflow is split into 3 variations for the first email because we are A/B testing 3 different copy versions
+• The 2nd and 3rd follow-up emails stay the same across all variations
+
+If a team member asks about ManyChat or Loop.so, walk them through the steps above. You are also allowed to search the ManyChat or Loop.so documentation if they have a specific question you are unsure about.
+
+OTHER DAILY TASKS
+
 • Check Slack every morning and respond to any client messages
 • Flag anything urgent to Greg before acting
 • Monitor ManyChat for new leads coming in from Instagram
 • Help manage Greg's Google Calendar, flag conflicts, prep reminders
-• Support the Instantly outreach pipeline once it is set up
 
 ESCALATION RULES
 
